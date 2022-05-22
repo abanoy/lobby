@@ -1,0 +1,357 @@
+/************************* Global **************************/
+* {
+    margin: auto;
+    padding: 0;
+    font-size: 20px;
+    font-family: Lucida Sans;
+}
+
+body {
+    background-color: black;
+    margin: 0;
+    overflow: hidden;
+}
+
+#cntFadeOut, #cntFadeIn {
+    background-color: black;
+    position:absolute;
+    top:0;
+    width: 100vw;
+    height: 100vh;
+    opacity: 1;
+    animation-duration: 0.5s;
+    z-index: 999;
+}
+
+#cntFadeOut {
+    animation-name: fade-out;
+}
+
+#cntFadeIn {
+    animation-name: fade-in;
+}
+
+.pattern {
+    height: 100vh;
+    width: 100vw;
+    transform-style: preserve-3d;
+    position: absolute;
+    perspective: 100px;
+    transform: rotate(0.1rad);
+}
+
+.button {
+    margin-right: 20px;
+    width: 10vh;
+    height: 3vh;
+    font-size: 18px;
+}
+
+.container {
+    background-color: white;
+    width: 420px;
+    height: 35px;
+    border: 6px solid black;
+    border-radius: 0px 0px 100px 100px;
+    max-width: 100%;
+    max-height: 100%;
+    position: absolute;
+}
+
+.textbox {
+    margin: 1% auto 3% auto;
+    width: 420px;
+    height: 20px;
+    letter-spacing: 5px;
+}
+
+.label {
+    display: block;
+    word-wrap: break-word;
+}
+
+img {
+    user-select: none;
+}
+
+.image {
+    display: block;
+    position: absolute;
+    perspective: 1000px;
+    transform-style: preserve-3d;
+    transform: translateY(0px) translateX(0px);
+    z-index: 1;
+}
+
+.footer {
+    font-size: 3vh;
+    position: absolute;
+    bottom: 1vh;
+    z-index: 1;
+    left: 1vw;
+}
+/***********************************************************/
+/************************ Keyframes ************************/
+@keyframes fade-out {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes fade-in {
+    0% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+@keyframes pop-in_screen {
+    0% {
+        transform: translate(3vh, -1000px);
+    }
+
+    100% {
+        transform: translate(3vh, -288px);
+    }
+}
+
+@keyframes title-fade {
+    0% {
+        transform: scaleX(1) scaleY(1);
+        backdrop-filter: blur(5px);
+    }
+
+    30% {
+        opacity: 100%;
+    }
+
+    100% {
+        transform: scaleX(2) scaleY(2);
+        opacity: 0%;
+        backdrop-filter: blur(0px);
+    } 
+}
+
+@keyframes flash {
+    0% {
+        background-image: url("img/gif/flash.gif");
+    }
+}
+/***********************************************************/
+/************************* Events **************************/
+#cntFirstTimePopup {
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin-top: 25vh;
+    width: 50vh;
+    height: 21.5vh;
+    background-color: white;
+}
+
+#cntFirstTimePopup > * {
+    font-size: 2vh;
+}
+
+#cntFirstTimePopup > label {
+    margin-bottom: 1vh;
+    margin-left: 5vh;
+}
+
+#btnOK {
+    position: relative;
+    left: 37vh;
+}
+
+#imgScene {
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin-top: 25vh;
+    width: 37vw;
+    z-index: 1;
+}
+
+#cntBackgroundEffect, #imgBackgroundEffect {
+    position: absolute;
+    margin: 0;
+    padding: 0;
+    width: 100vw;
+    height: 100vh;
+}
+/***********************************************************/
+/************************* World ***************************/
+#cntWorldBackground {
+    width: 200vw;
+    height: 200vh;
+    background-image: url('img/bg/world/playground/bg.png');
+    position: absolute;
+}
+
+#cntEvents ~ #cntTitle {
+    backdrop-filter: blur(5px);
+    transform: scaleX(1.2) scaleY(1.2);
+}
+
+#cntCollision, #cntEvents {
+    visibility: hidden;
+}
+
+.tile {
+    display: flex;
+    flex-wrap: wrap;
+    grid-template-columns: 64px 64px 64px;
+    position:absolute;
+    top: 50vh;
+    left: 50vw;
+}
+
+#imgWorldTenant {
+    position: absolute;
+    transform: translateX(0px) translateY(0px);
+    transition: none;
+    user-select: none;
+    z-index: 0;
+    top: 50vh;
+    left: 50vw;
+}
+
+#cntTitle, #cntPause {
+    color: white;
+    font-weight: bold;
+    -webkit-text-stroke: 0.12vh black;
+    height: 100vh;
+}
+
+#cntTitle > label{
+    display: table;
+    position: relative;
+    font-size: 5vh;
+    top: 35vh;
+}
+
+#cntPause {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    display: flex;
+    flex-flow: column wrap;
+}
+
+#cntTitle > #lblTitle {
+    font-size: 15vh;
+    -webkit-text-stroke: 0.30vh black;
+}
+
+#cntTitle > #lblWarning {
+    font-size: 3vh;
+    margin-top: 30vh;
+    -webkit-text-stroke: 0.1vh black;
+}
+
+#hrLine00 {
+    width: 25vw;
+    height: 0.5vw;
+    background-color: white;
+}
+
+#cntPauseMenu {
+    flex-flow: column
+}
+
+#cntPauseMenu > #lblTitle {
+    font-size: 10vh;
+    -webkit-text-stroke: 0.30vh black;
+}
+
+#cntPauseMenu > label:not(#lblTitle) {
+    font-size: 8vh;
+    -webkit-text-stroke: 0.30vh black;
+}
+
+.labelClicked {
+    transform-origin: top top;
+    animation-name: title-fade;
+    animation-duration: 2s;
+}
+
+#cntStatus, #cntPauseMenu {
+    position: relative;
+    display: flex;
+    width: 40vw;
+    height: 30vw;
+}
+
+#lblFooterWorld {
+    color: white;
+}
+/***********************************************************/
+/************************* Battle **************************/
+#cntPlatform, #cntGround, #cntFallground, #cntUpperGround, #cntLowerGround {
+    position: absolute;
+    width: 100vw;
+    height: 13vh;
+    top: 87vh;
+    background-repeat: repeat-x;
+}
+
+#cntPlatform {
+    top: 16vh;
+}
+
+#cntUpperGround {
+    top: 60vh;
+    height: 6.4vh;
+}
+
+#cntGround {
+    top: 66.4vh;
+    background-repeat: repeat;
+}
+
+#cntLowerGround {
+    top: 72.8vh;
+    height: 6.5vh;
+}
+
+#cntFallground {
+    top: 79.3vh;
+    height: 100vh;
+    background-repeat: repeat;
+}
+
+#imgUser {
+    width: 8vh;
+    height: 23vh;
+}
+
+#cntUser {
+    position: absolute;
+    width: 8vh;
+    height: 23vh;
+    background-color: red;
+}
+
+#cntUserFight {
+    position: absolute;
+    width: 8vh;
+    top: 5vh;
+    height: 3vh;
+    background-color: green;
+}
+
+#cntUserBottom {
+    position: absolute;
+    width: 8vh;
+    height: 1vh;
+    bottom: 0;
+    background-color: blue;
+}
+/***********************************************************/
